@@ -15,5 +15,26 @@ public class GuiPanel extends JPanel
 		public GuiPanel(GuiController baseController)
 			{
 
+				
+				
+				setupPanel();
+				setupLayout();
+				setupListeners();
 			}
+		
+		public void setupPanel()
+		{
+			
+		}
+		
+		public void setupLayout()
+			{
+				
+				
+			}
+			
+		public void setupListeners()
+		{
+			
+		}
 	}
