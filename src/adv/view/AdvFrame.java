@@ -1,23 +1,24 @@
-package gui.view;
+package adv.view;
 
 import javax.swing.JFrame;
+
+import adv.controller.AdvController;
+
 import java.awt.Color;
 
 import java.awt.Dimension;
 
-import gui.controller.GuiController;
-
-public class GuiFrame extends JFrame
+public class AdvFrame extends JFrame
 {
-	private GuiController baseController;
-	private GuiPanel appPanel;
+	private AdvController baseController;
+	private AdvPanel appPanel;
 	
 	
-	public GuiFrame(GuiController baseController)
+	public AdvFrame(AdvController baseController)
 	{
 		super();
 		this.baseController = baseController;
-		appPanel = new GuiPanel(baseController);
+		appPanel = new AdvPanel(baseController);
 		
 		setupFrame(500,500);
 		setupListeners();

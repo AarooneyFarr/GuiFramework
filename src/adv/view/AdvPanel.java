@@ -1,18 +1,20 @@
-package gui.view;
+package adv.view;
 
 import javax.swing.*;
+
+import adv.controller.AdvController;
+import adv.model.*;
+
 import java.awt.*;
-import gui.controller.GuiController;
 import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import gui.model.*;
 
-public class GuiPanel extends JPanel
+public class AdvPanel extends JPanel
 	{
-		public GuiPanel(GuiController baseController)
+		public AdvPanel(AdvController baseController)
 			{
 
 				
