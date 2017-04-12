@@ -1,11 +1,14 @@
 package adv.controller;
 
 import adv.view.*;
+import adv.model.*;
+import java.util.ArrayList;
 
 public class AdvController
 	{
 
 		private AdvFrame appFrame;
+		private ArrayList<CowboyPizza> myPizzas;
 		
 		public AdvController()
 		{
@@ -17,4 +20,9 @@ public class AdvController
 			
 		}
 		
+		private void setupList()
+		{
+			myPizzas.add(new CowboyPizza());
+			
+		}
 	}
