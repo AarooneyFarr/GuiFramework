@@ -1,23 +1,24 @@
-package gui.view;
+package drawing.view;
 
 import javax.swing.JFrame;
+
+import drawing.controller.DrawingController;
+
 import java.awt.Color;
 
 import java.awt.Dimension;
 
-import gui.controller.GuiController;
-
-public class GuiFrame extends JFrame
+public class DrawingFrame extends JFrame
 {
-	private GuiController baseController;
-	private GuiPanel appPanel;
+	private DrawingController baseController;
+	private DrawingPanel appPanel;
 	
 	
-	public GuiFrame(GuiController baseController)
+	public DrawingFrame(DrawingController baseController)
 	{
 		super();
 		this.baseController = baseController;
-		appPanel = new GuiPanel(baseController);
+		appPanel = new DrawingPanel(baseController);
 		
 		setupFrame(500,500);
 		setupListeners();
