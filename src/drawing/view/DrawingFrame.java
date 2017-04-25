@@ -29,6 +29,7 @@ public class DrawingFrame extends JFrame
 		this.setContentPane(appPanel);
 		this.setTitle("Base Frame");
 		this.setSize(new Dimension(width, height));
+		this.setResizable(true);
 		this.setVisible(true);
 		this.setBackground(Color.GREEN);
 	}

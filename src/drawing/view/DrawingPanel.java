@@ -25,7 +25,8 @@ public class DrawingPanel extends JPanel
 
 				shapePanel = new ShapePanel(baseController);
 				rectangleButton = new JButton("Draw Rectangles");
-
+				
+				
 				setupPanel();
 				setupLayout();
 				setupListeners();
@@ -47,6 +48,14 @@ public class DrawingPanel extends JPanel
 
 		public void setupListeners()
 			{
+				rectangleButton.addActionListener(new ActionListener()
+					{
 
+						public void actionPerformed(ActionEvent e)
+							{
+								shapePanel.addRectangles();
+								shapePanel.setupShapes();
+							}
+					});
 			}
 	}
