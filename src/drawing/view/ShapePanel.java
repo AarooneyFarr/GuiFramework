@@ -7,6 +7,7 @@ import drawing.model.*;
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.awt.geom.Ellipse2D;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,7 +34,8 @@ public class ShapePanel extends JPanel
 				ellipseList = new ArrayList<Shape>();
 				polygonList = new ArrayList<Shape>();
 				shapes = new ArrayList<ArrayList<Shape>>();
-
+				
+				setupShapes();
 				setupPanel();
 			}
 
@@ -52,14 +54,26 @@ public class ShapePanel extends JPanel
 
 				return new Color(red, green, blue, alpha);
 			}
+
 		public void setupShapes()
-		{
-			shapes.add(rectangleList);
-		}
+			{
+				shapes.add(polygonList);
+				shapes.add(triangleList);
+				shapes.add(rectangleList);
+				
+				shapes.add(circleList);
+				shapes.add(ellipseList);
+				
+			}
 
 		public void addRectangles()
 			{
-				for (int index = 0; index < 500; index++)
+				if (rectangleList.size() > 500)
+					{
+						rectangleList.clear();
+					}
+
+				for (int index = 0; index < 30; index++)
 					{
 						int width = (int) (Math.random() * 120) + 1;
 						int height = (int) (Math.random() * 120) + 15;
@@ -75,36 +89,122 @@ public class ShapePanel extends JPanel
 				this.repaint();
 
 			}
-		
+
+		public void addCircles()
+			{
+				if (circleList.size() > 500)
+					{
+						circleList.clear();
+					}
+
+				for (int index = 0; index < 30; index++)
+					{
+						int radius = (int) (Math.random() * 25) + 2;
+						int xCorner = (int) (Math.random() * this.getWidth() - 15);
+						int yCorner = (int) (Math.random() * this.getHeight() - 15);
+						Ellipse2D.Double current = new Ellipse2D.Double(xCorner, yCorner, radius, radius);
+						circleList.add(current);
+					}
+				this.repaint();
+			}
+
+		public void addTriangles()
+			{
+				if (triangleList.size() > 500)
+					{
+						triangleList.clear();
+					}
+				
+				for(int index = 0; index < 30; index ++ )
+					{
+						int vertexCount = 3;
+						int [] xVertices = new int [vertexCount];
+						int [] yVertices = new int [vertexCount];
+						for(int vertex = 0; vertex < vertexCount; vertex++)
+							{
+								int xCorner = (int) (Math.random() * this.getWidth());
+								int yCorner = (int) (Math.random() * this.getHeight());
+								xVertices[vertex] = xCorner;
+								yVertices[vertex] = yCorner;
+							}
+						Polygon current = new Polygon(xVertices, yVertices, vertexCount);
+						polygonList.add(current);
+					}
+				this.repaint();
+			}
+
+		public void addEllipses()
+			{
+				if (ellipseList.size() > 500)
+					{
+						ellipseList.clear();
+					}
+
+				for (int index = 0; index < 30; index++)
+					{
+						int height = (int) (Math.random() * 25) + 2;
+						int width = (int) (Math.random() * 25) + 2;
+						int xCorner = (int) (Math.random() * this.getWidth() - 15);
+						int yCorner = (int) (Math.random() * this.getHeight() - 15);
+						Ellipse2D.Double current = new Ellipse2D.Double(xCorner, yCorner, height, width);
+						ellipseList.add(current);
+					}
+				this.repaint();
+			}
+
+		public void addPolygons()
+			{
+				if (polygonList.size() > 500)
+					{
+						polygonList.clear();
+					}
+				
+				for(int index = 0; index < 30; index ++ )
+					{
+						int vertexCount = (int) (Math.random() * 7) + 4;
+						int [] xVertices = new int [vertexCount];
+						int [] yVertices = new int [vertexCount];
+						for(int vertex = 0; vertex < vertexCount; vertex++)
+							{
+								int xCorner = (int) (Math.random() * this.getWidth());
+								int yCorner = (int) (Math.random() * this.getHeight());
+								xVertices[vertex] = xCorner;
+								yVertices[vertex] = yCorner;
+							}
+						Polygon current = new Polygon(xVertices, yVertices, vertexCount);
+						polygonList.add(current);
+					}
+				this.repaint();
+			}
+
 		private void drawShapes(ArrayList<Shape> shapeList, Graphics2D graphics)
-		{
-			for(Shape currentShape : shapeList)
-				{
-					graphics.setColor(getRandomColor());
-					int strokeWidth = (int) (Math.random() * 35);
-					graphics.setStroke(new BasicStroke(strokeWidth));
-					
-					int randomness = (int) (Math.random() * 10) + 1;
-					
-					if(randomness % 5 == 00 || randomness % 7 == 0)
-						{
-							graphics.fill(currentShape);
-							graphics.setColor(getRandomColor());
-							graphics.draw(currentShape);
-						}
-					else
-						{
-							graphics.draw(currentShape);
-						}
-					
-					
-				}
-		}
+			{
+				for (Shape currentShape : shapeList)
+					{
+						graphics.setColor(getRandomColor());
+						int strokeWidth = (int) (Math.random() * 35);
+						graphics.setStroke(new BasicStroke(strokeWidth));
+
+						int randomness = (int) (Math.random() * 10) + 1;
+
+						if (randomness % 5 == 00 || randomness % 7 == 0)
+							{
+								graphics.fill(currentShape);
+								graphics.setColor(getRandomColor());
+								graphics.draw(currentShape);
+							}
+						else
+							{
+								graphics.draw(currentShape);
+							}
+
+					}
+			}
 
 		@Override
 		protected void paintComponent(Graphics graphics)
 			{
-			
+
 				Graphics2D drawingGraphics = (Graphics2D) graphics;
 
 				for (ArrayList<Shape> currentList : shapes)
