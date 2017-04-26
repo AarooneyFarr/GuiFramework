@@ -20,8 +20,10 @@ public class DrawingPanel extends JPanel
 		private JButton circleButton;
 		private JButton ellipseButton;
 		private JButton polygonButton;
+		private JButton saveButton;
 		private DrawingController baseController;
-
+		
+		
 		public DrawingPanel(DrawingController baseController)
 			{
 				super();
@@ -33,6 +35,8 @@ public class DrawingPanel extends JPanel
 				circleButton = new JButton("Draw Circles");
 				polygonButton = new JButton("Draw Polygons");
 				ellipseButton = new JButton("Draw Ovals");
+				saveButton = new JButton("Save");
+				
 				
 				
 				setupPanel();
@@ -50,16 +54,17 @@ public class DrawingPanel extends JPanel
 				this.add(ellipseButton);
 				this.add(polygonButton);
 				this.add(shapePanel);
+				this.add(saveButton);
 			}
 
 		public void setupLayout()
 			{
 				rectangleButton.setBounds(176,391,148,54);
-				triangleButton.setBounds(6, 391, 148, 54);
-				circleButton.setBounds(346, 391, 148, 54);
-				polygonButton.setBounds(285, 325, 148, 54);
-				ellipseButton.setBounds(69, 325, 148, 54);
-
+				triangleButton.setBounds(14, 391, 148, 54);
+				circleButton.setBounds(338, 391, 148, 54);
+				polygonButton.setBounds(338, 325, 148, 54);
+				ellipseButton.setBounds(176, 325, 148, 54);
+				saveButton.setBounds(14,325,148,54);
 
 
 
@@ -115,5 +120,16 @@ public class DrawingPanel extends JPanel
 								
 							}
 					});
+				saveButton.addActionListener(new ActionListener()
+					{
+
+						public void actionPerformed(ActionEvent e)
+							{
+								shapePanel.savePanel();
+								
+							}
+					});
+				
+				
 			}
 	}

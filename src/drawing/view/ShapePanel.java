@@ -1,13 +1,22 @@
 package drawing.view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 import drawing.controller.DrawingController;
 import drawing.model.*;
 import java.util.ArrayList;
+import java.util.Vector;
+import java.util.List;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,7 +32,10 @@ public class ShapePanel extends JPanel
 		private ArrayList<Shape> ellipseList;
 		private ArrayList<Shape> polygonList;
 		private ArrayList<ArrayList<Shape>> shapes;
-
+		
+		
+		
+		
 		public ShapePanel(DrawingController baseController)
 			{
 				super();
@@ -35,6 +47,8 @@ public class ShapePanel extends JPanel
 				polygonList = new ArrayList<Shape>();
 				shapes = new ArrayList<ArrayList<Shape>>();
 				
+				
+				
 				setupShapes();
 				setupPanel();
 			}
@@ -44,6 +58,11 @@ public class ShapePanel extends JPanel
 				this.setBackground(Color.CYAN);
 				this.setMinimumSize(new Dimension(250, 500));
 			}
+		
+		private void setupListeners()
+		{
+			
+		}
 
 		private Color getRandomColor()
 			{
@@ -182,7 +201,7 @@ public class ShapePanel extends JPanel
 				for (Shape currentShape : shapeList)
 					{
 						graphics.setColor(getRandomColor());
-						int strokeWidth = (int) (Math.random() * 35);
+						int strokeWidth = (int) (Math.random() * 15);
 						graphics.setStroke(new BasicStroke(strokeWidth));
 
 						int randomness = (int) (Math.random() * 10) + 1;
@@ -200,6 +219,27 @@ public class ShapePanel extends JPanel
 
 					}
 			}
+		
+		public void savePanel()
+		{
+			BufferedImage panelImage = new BufferedImage(this.getSize().width, this.getSize().height, BufferedImage.TYPE_INT_ARGB);
+			Graphics fileGraphics = panelImage.getGraphics();
+			
+			Color background = new Color(getBackground().getRed(), getBackground().getGreen(), getBackground().getBlue());
+			fileGraphics.setColor(background);;
+			fileGraphics.fillRect(0, 0,  this.getSize().width, this.getSize().height);
+			this.printAll(fileGraphics);
+			fileGraphics.dispose();
+			
+			try
+				{
+					ImageIO.write(panelImage,  "png", new File("My Modern Art " + LocalDateTime.now().getHour() + "-" + LocalDateTime.now().getMinute() + ".png"));
+				}
+			catch (IOException errror)
+				{
+					JOptionPane.showMessageDialog(this, "Save Failed");
+				}
+		}
 
 		@Override
 		protected void paintComponent(Graphics graphics)
@@ -211,5 +251,7 @@ public class ShapePanel extends JPanel
 					{
 						drawShapes(currentList, drawingGraphics);
 					}
+				
+				
 			}
 	}
